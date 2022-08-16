@@ -7,18 +7,28 @@ import {
   createEffect,
 } from "solid-js";
 import ProjectCard from "./ProjectCard";
-// import Glide from "@glidejs/glide";
 import { useGlobal } from "./GlobalProvider";
 
+import "keen-slider/keen-slider.min.css";
+import KeenSlider from "keen-slider";
+
 const Projects: Component<{}> = (props) => {
+  let container: HTMLDivElement;
+
   createEffect(() => {
-    if (useGlobal().isMobile) {
-      // new Glide(".glide", {
-      //   type: "carousel",
-      //   perView: 1,
-      //   peek: { before: 0, after: 100 },
-      // }).mount();
-    }
+    if (container)
+      var slider = new KeenSlider(
+        container,
+        {
+          loop: true,
+          created: () => {
+            console.log("created");
+          },
+        },
+        [
+          // add plugins here
+        ]
+      );
   });
 
   const projects: JSXElement[] = [
@@ -108,7 +118,7 @@ const Projects: Component<{}> = (props) => {
                   >
                     <div
                       h-full
-                      children:bg-dark-500
+                      children:bg-dark-800
                       children:rounded-xl
                       children:shadow-xl
                       text-center
@@ -130,52 +140,36 @@ const Projects: Component<{}> = (props) => {
             </div>
           }
         >
-          <div mt-10 max-w-200 class="glide">
-            <div class="glide__track" data-glide-el="track">
-              <ul class="glide__slides">
-                <For each={projects}>
-                  {(el, i) => (
-                    <li
-                      mx-8
-                      classList={{ "col-start-2": i() === 0 }}
-                      class="children:hover:rotate-y-180 glide__slide"
+          <div mt-10 max-w-200 ref={container}>
+            <div>
+              <For each={projects}>
+                {(el, i) => (
+                  <div
+                    mx-8
+                    classList={{ "col-start-2": i() === 0 }}
+                    class="children:hover:rotate-y-180 glide__slide"
+                  >
+                    <div
+                      h-full
+                      children:bg-dark-500
+                      children:rounded-xl
+                      children:shadow-xl
+                      text-center
+                      transition-transform-500
+                      children:backface-hidden
+                      style="transform-style: preserve-3d;"
+                      // dark magic to get elements to overlap without position-absolute
+                      grid
+                      grid-cols-1
+                      grid-rows-1
+                      children:col-start-1
+                      children:row-start-1
                     >
-                      <div
-                        h-full
-                        children:bg-dark-500
-                        children:rounded-xl
-                        children:shadow-xl
-                        text-center
-                        transition-transform-500
-                        children:backface-hidden
-                        style="transform-style: preserve-3d;"
-                        // dark magic to get elements to overlap without position-absolute
-                        grid
-                        grid-cols-1
-                        grid-rows-1
-                        children:col-start-1
-                        children:row-start-1
-                      >
-                        {el}
-                      </div>
-                    </li>
-                  )}
-                </For>
-              </ul>
-              <div class="glide__arrows" data-glide-el="controls">
-                <button
-                  class="glide__arrow glide__arrow--left"
-                  data-glide-dir="<"
-                >
-                  <div i-material-symbols-arrow-back text-white />
-                </button>
-                <button
-                  class="glide__arrow glide__arrow--right"
-                  data-glide-dir=">"
-                >
-                  <div i-material-symbols-arrow-forward text-white />
-                </button>
-              </div>
+                      {el}
+                    </div>
+                  </div>
+                )}
+              </For>
             </div>
           </div>
         </Show>

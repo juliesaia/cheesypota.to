@@ -25,6 +25,7 @@ const Contact: Component<{}> = (props) => {
 
         <div
           border
+          border-green-300
           border-width-4
           max-w-150
           w-full
@@ -61,6 +62,7 @@ const Contact: Component<{}> = (props) => {
               text-green-300
               rounded-xl
               border
+              border-green-300
               py-5
               transition-colors
               type="button"

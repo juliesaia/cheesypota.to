@@ -4,12 +4,12 @@ import About from "~/components/About";
 import Fade from "~/components/Fade";
 import Contact from "~/components/Contact";
 import { useGlobal } from "~/components/GlobalProvider";
+import { Title } from "solid-start";
 
 import {
   Component,
   createSignal,
   createMemo,
-  onMount,
   For,
   Show,
   createEffect,
@@ -23,12 +23,16 @@ const Index: Component<{}> = (props) => {
   const tabs = ["Home", "Projects", "About", "Contact"];
   const tab_refs: HTMLDivElement[] = new Array(tabs.length);
 
+  const [navbarShow, setNavbarShow] = createSignal(false);
+
   const [selectedIndex, setSelectedIndex] = createSignal(0);
 
   const global = useGlobal();
 
+  // console.log(global);
+
   const viewport = createMemo(
-    () => `[calc(100vh_-_${global.isMobile ? 0 : navbarHeight}px)]`
+    () => `[calc(100vh_-_${global?.isMobile ? 0 : navbarHeight}px)]`
   );
 
   createEffect(() => {
@@ -37,13 +41,16 @@ const Index: Component<{}> = (props) => {
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
 
-    console.log(global.isMobile);
+    // console.log(global?.isMobile);
 
-    if (global.isMobile === null) {
+    if (global?.isMobile === null) {
       return;
     }
+    console.log("!global?.isMobile", !global?.isMobile);
 
-    if (!global.isMobile) {
+    setNavbarShow(!global?.isMobile);
+
+    if (!global?.isMobile) {
       let fired = false;
       let prevY = 0;
       const observer_navbar = new IntersectionObserver(
@@ -83,8 +90,9 @@ const Index: Component<{}> = (props) => {
 
   return (
     <>
-      {/* <Title>Julie Saia</Title> */}
-      <Show when={!global.isMobile}>
+      <Title>Julie Saia</Title>
+      {/* <button onClick={() => console.log(!global?.isMobile)}>debug</button> */}
+      <Show when={navbarShow()}>
         <nav
           ref={navbar}
           h={`${navbarHeight / 4}`}
@@ -108,7 +116,7 @@ const Index: Component<{}> = (props) => {
                 items-center
                 px-6
                 my-6
-                classList={{ "bg-dark-700": selectedIndex() === i() }}
+                classList={{ "bg-dark-800": selectedIndex() === i() }}
                 onClick={() => {
                   if (i() == 0) window.scrollTo(0, 0);
                   else tab_refs[i()].scrollIntoView();
@@ -122,7 +130,7 @@ const Index: Component<{}> = (props) => {
       </Show>
       <div
         min-h={viewport()}
-        bg-dark-500
+        bg-dark-800
         ref={tab_refs[0]}
         scroll-mb-16
         overflow-hidden
@@ -131,7 +139,7 @@ const Index: Component<{}> = (props) => {
       </div>
       <div
         min-h={viewport()}
-        bg-dark-300
+        bg-dark-500
         ref={tab_refs[1]}
         scroll-mb-16
         overflow-hidden
@@ -142,7 +150,7 @@ const Index: Component<{}> = (props) => {
       </div>
       <div
         min-h={viewport()}
-        bg-dark-500
+        bg-dark-800
         ref={tab_refs[2]}
         scroll-mb-16
         overflow-hidden
@@ -153,7 +161,7 @@ const Index: Component<{}> = (props) => {
       </div>
       <div
         min-h={viewport()}
-        bg-dark-300
+        bg-dark-500
         ref={tab_refs[3]}
         scroll-mb-16
         overflow-hidden

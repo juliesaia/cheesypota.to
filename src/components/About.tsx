@@ -16,6 +16,7 @@ const About: Component<{}> = (props) => {
           <div
             bg-dark-300
             border
+            border-green-300
             border-width-2
             rounded-xl
             shadow-xl

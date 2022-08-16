@@ -10,7 +10,7 @@ const ProjectCard: Component<{
 }> = (props) => {
   return (
     <>
-      <div flex flex-col max-h-100>
+      <div flex flex-col>
         <div p-6>{props.title}</div>
         <div>
           <img

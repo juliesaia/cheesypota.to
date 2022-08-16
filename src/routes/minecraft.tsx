@@ -2,6 +2,8 @@
 // todo: checklist?
 // todo: save as json
 
+import { Title } from "solid-start";
+
 import {
   batch,
   Component,
@@ -135,7 +137,7 @@ const minecraft: Component<{}> = (props) => {
       items-center
       text-center
     >
-      {/* <Title>Minecraft Crafting Calculator</Title> */}
+      <Title>Minecraft Crafting Calculator</Title>
       <div text-6xl my-8>
         Minecraft Crafting Calculator
       </div>

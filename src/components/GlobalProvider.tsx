@@ -9,6 +9,7 @@ export function GlobalProvider(props) {
 
   onMount(() => {
     setGlobal("isMobile", navigator.userAgentData.mobile);
+    console.log(navigator.userAgentData.mobile);
   });
 
   return (
