@@ -3,7 +3,6 @@ import Projects from "~/components/Projects";
 import About from "~/components/About";
 import Fade from "~/components/Fade";
 import Contact from "~/components/Contact";
-import { useGlobal } from "~/components/GlobalProvider";
 import { Title } from "solid-start";
 
 import {
@@ -13,6 +12,7 @@ import {
   For,
   Show,
   createEffect,
+  onMount,
 } from "solid-js";
 // import { Title } from "solid-meta";
 
@@ -23,113 +23,115 @@ const Index: Component<{}> = (props) => {
   const tabs = ["Home", "Projects", "About", "Contact"];
   const tab_refs: HTMLDivElement[] = new Array(tabs.length);
 
-  const [navbarShow, setNavbarShow] = createSignal(false);
-
   const [selectedIndex, setSelectedIndex] = createSignal(0);
 
-  const global = useGlobal();
+  let observer_navbar: IntersectionObserver;
 
-  // console.log(global);
+  function setup_observers() {
+    let fired = false;
+    let prevY = 0;
 
-  const viewport = createMemo(
-    () => `[calc(100vh_-_${global?.isMobile ? 0 : navbarHeight}px)]`
-  );
+    observer_navbar = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (fired) {
+          let st = window.pageYOffset || document.documentElement.scrollTop;
 
-  createEffect(() => {
+          if (st > prevY) {
+            // https://www.smashingmagazine.com/2021/07/dynamic-header-intersection-observer/
+            // down
+            if (!entry.isIntersecting) {
+              setSelectedIndex(selectedIndex() + 1);
+            }
+            prevY = st <= 0 ? 0 : st;
+          } else if (st < prevY) {
+            // up
+            if (entry.isIntersecting) setSelectedIndex(selectedIndex() - 1);
+
+            prevY = st <= 0 ? 0 : st;
+          }
+        } else {
+          fired = true;
+        }
+      },
+      { threshold: 0, rootMargin: `${navbarHeight * -1 - 1}px 0px 0px 0px` }
+    );
+
+    for (let ref of tab_refs) {
+      if (ref) {
+        observer_navbar.observe(ref);
+      }
+    }
+  }
+
+  onMount(() => {
     // const mobile = navigator.userAgentData.mobile;
     // setIsMobile(mobile);
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
 
-    // console.log(global?.isMobile);
-
-    if (global?.isMobile === null) {
-      return;
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      setup_observers();
     }
-    console.log("!global?.isMobile", !global?.isMobile);
 
-    setNavbarShow(!global?.isMobile);
-
-    if (!global?.isMobile) {
-      let fired = false;
-      let prevY = 0;
-      const observer_navbar = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-
-          if (fired) {
-            let st = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (st > prevY) {
-              // https://www.smashingmagazine.com/2021/07/dynamic-header-intersection-observer/
-              // down
-              if (!entry.isIntersecting) {
-                setSelectedIndex(selectedIndex() + 1);
-              }
-              prevY = st <= 0 ? 0 : st;
-            } else {
-              // up
-              if (entry.isIntersecting) setSelectedIndex(selectedIndex() - 1);
-
-              prevY = st <= 0 ? 0 : st;
+    window.matchMedia("(min-width: 768px)").addEventListener("change", (e) => {
+      if (e.matches) {
+        setup_observers();
+      } else {
+        if (observer_navbar) {
+          for (let ref of tab_refs) {
+            if (ref) {
+              observer_navbar.unobserve(ref);
             }
-          } else {
-            fired = true;
           }
-        },
-        { threshold: 0, rootMargin: `${navbarHeight * -1 - 1}px` }
-      );
-
-      for (let ref of tab_refs) {
-        if (ref) {
-          observer_navbar.observe(ref);
         }
       }
-    }
+    });
   });
 
   return (
     <>
       <Title>Julie Saia</Title>
-      {/* <button onClick={() => console.log(!global?.isMobile)}>debug</button> */}
-      <Show when={navbarShow()}>
-        <nav
-          ref={navbar}
-          h={`${navbarHeight / 4}`}
-          bg-dark-900
-          text-white
-          flex
-          items-center
-          position-sticky
-          top-0
-          z-1000
-        >
-          <For each={tabs}>
-            {(el, i) => (
-              <a
-                href="/"
-                transition-colors
-                ease-in-out
-                hover:bg-dark-700
-                h-full
-                flex
-                items-center
-                px-6
-                my-6
-                classList={{ "bg-dark-800": selectedIndex() === i() }}
-                onClick={() => {
-                  if (i() == 0) window.scrollTo(0, 0);
-                  else tab_refs[i()].scrollIntoView();
-                }}
-              >
-                {el}
-              </a>
-            )}
-          </For>
-        </nav>
-      </Show>
+
+      <nav
+        lt-md:display-none
+        ref={navbar}
+        h={`${navbarHeight / 4}`}
+        bg-dark-900
+        text-white
+        flex
+        items-center
+        position-sticky
+        top-0
+        z-1000
+      >
+        <For each={tabs}>
+          {(el, i) => (
+            <a
+              href="/"
+              transition-colors
+              ease-in-out
+              hover:bg-dark-700
+              h-full
+              flex
+              items-center
+              px-6
+              my-6
+              classList={{ "bg-dark-800": selectedIndex() === i() }}
+              onClick={() => {
+                if (i() == 0) window.scrollTo(0, 0);
+                else tab_refs[i()].scrollIntoView();
+              }}
+            >
+              {el}
+            </a>
+          )}
+        </For>
+      </nav>
+
       <div
-        min-h={viewport()}
+        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
+        min-h-screen
         bg-dark-800
         ref={tab_refs[0]}
         scroll-mb-16
@@ -138,7 +140,8 @@ const Index: Component<{}> = (props) => {
         <Home />
       </div>
       <div
-        min-h={viewport()}
+        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
+        min-h-screen
         bg-dark-500
         ref={tab_refs[1]}
         scroll-mb-16
@@ -149,7 +152,8 @@ const Index: Component<{}> = (props) => {
         </Fade>
       </div>
       <div
-        min-h={viewport()}
+        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
+        min-h-screen
         bg-dark-800
         ref={tab_refs[2]}
         scroll-mb-16
@@ -160,7 +164,8 @@ const Index: Component<{}> = (props) => {
         </Fade>
       </div>
       <div
-        min-h={viewport()}
+        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
+        min-h-screen
         bg-dark-500
         ref={tab_refs[3]}
         scroll-mb-16
