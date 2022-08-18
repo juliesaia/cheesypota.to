@@ -9,9 +9,6 @@ import {
 } from "unocss";
 
 export default defineConfig({
-  ssr: {
-    // noExternal: ["keen-slider"],
-  },
   plugins: [
     solid(),
     Unocss({

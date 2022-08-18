@@ -11,23 +11,39 @@ import ProjectCard from "./ProjectCard";
 import "keen-slider/keen-slider.min.css";
 import KeenSlider from "keen-slider";
 
+const ResizePlugin = (slider) => {
+  const observer = new ResizeObserver(function () {
+    slider.update();
+    console.log("updated");
+  });
+
+  slider.on("created", () => {
+    observer.observe(slider.container);
+  });
+  slider.on("destroyed", () => {
+    observer.unobserve(slider.container);
+  });
+};
+
 const Projects: Component<{}> = (props) => {
   let container: HTMLDivElement;
-
-  createEffect(() => {
-    if (container)
-      var slider = new KeenSlider(
-        container,
-        {
-          loop: true,
-          created: () => {
-            console.log("created");
-          },
+  let slider;
+  onMount(() => {
+    console.log(container);
+    slider = new KeenSlider(
+      container,
+      {
+        slides: {
+          origin: "center",
+          perView: 1.5,
+          spacing: 50,
         },
-        [
-          // add plugins here
-        ]
-      );
+        created: () => {
+          console.log("created");
+        },
+      },
+      [ResizePlugin]
+    );
   });
 
   const projects: JSXElement[] = [
@@ -105,7 +121,7 @@ const Projects: Component<{}> = (props) => {
           libraries in my projects!
         </div>
 
-        <div grid grid-cols-5 mt-10>
+        <div lt-md:display-none grid grid-cols-5 mt-10>
           <For each={projects}>
             {(el, i) => (
               <div
@@ -136,18 +152,24 @@ const Projects: Component<{}> = (props) => {
           </For>
         </div>
 
-        <div mt-10 max-w-200 ref={container}>
-          <div>
+        <div md:display-none mt-10 max-w-200>
+          <div
+            ref={container}
+            class="keen-slider"
+            style="width: 100vw !important;"
+          >
             <For each={projects}>
               {(el, i) => (
                 <div
-                  mx-8
-                  classList={{ "col-start-2": i() === 0 }}
-                  class="children:hover:rotate-y-180 glide__slide"
+                  classList={{
+                    "col-start-2": i() === 0,
+                    // [`number-slide${i()}`]: true,
+                  }}
+                  class="children:hover:rotate-y-180 keen-slider__slide"
                 >
                   <div
                     h-full
-                    children:bg-dark-500
+                    children:bg-dark-800
                     children:rounded-xl
                     children:shadow-xl
                     text-center
