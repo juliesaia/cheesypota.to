@@ -21,10 +21,7 @@ export default defineConfig({
             "w-full p-6 flex justify-evenly children:w-full children:text-5xl",
           labels:
             "w-full bg-green-300 h-8 text-black flex justify-evenly text-center px-6 children:w-full",
-          linkgreen:
-            "border-4 border-green-500 mx-4 px-6 py-3 rounded-xl flex items-center transition-colors hover:(bg-green-300 text-black)",
-          linkblue:
-            "border-4 border-blue-500 mx-4 px-6 py-3 rounded-xl flex items-center transition-colors hover:(bg-blue-300 text-black)",
+          link: "border-4 mx-4 px-6 py-3 rounded-xl flex items-center transition-colors hover:(text-black)",
         },
       ],
       transformers: [transformerVariantGroup()],

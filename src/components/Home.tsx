@@ -15,14 +15,22 @@ const Home: Component<{}> = (props) => {
           I'm a full-stack web developer from Ann Arbor, MI.
         </span>
         <div mt-8 flex justify-center text-white>
-          <a href="https://github.com/juliesaia" linkgreen z-1000>
+          <a
+            href="https://github.com/juliesaia"
+            link
+            border-green-500
+            hover:bg-green-300
+            z-1000
+          >
             <span>Github</span>
             <div i-akar-icons-github-fill text-3xl ml-2 />
           </a>
 
           <a
             href="https://www.linkedin.com/in/julie-s-bb9624202/"
-            linkblue
+            link
+            border-blue-500
+            hover:bg-blue-300
             z-1000
           >
             <span>LinkedIn</span>

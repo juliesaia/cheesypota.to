@@ -28,7 +28,6 @@ const Projects: Component<{}> = (props) => {
   let container: HTMLDivElement;
   let slider;
   onMount(() => {
-    console.log(container);
     slider = new KeenSlider(
       container,
       {
@@ -36,9 +35,6 @@ const Projects: Component<{}> = (props) => {
           origin: "center",
           perView: 1.5,
           spacing: 50,
-        },
-        created: () => {
-          console.log("created");
         },
       },
       [ResizePlugin]
@@ -118,6 +114,14 @@ const Projects: Component<{}> = (props) => {
         <div text-2xl mt-8 text-center px-4>
           I'm most proficient with React and Vue, but I love using cutting edge
           libraries in my projects!
+        </div>
+
+        <div lt-md:display-none text-2xl mt-8 text-center px-4>
+          Hover the cards to learn more:
+        </div>
+
+        <div md:display-none text-2xl mt-8 text-center px-4>
+          Tap the cards to learn more:
         </div>
 
         <div lt-md:display-none mt-10 grid grid-cols-3>

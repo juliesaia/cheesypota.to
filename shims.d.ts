@@ -2,7 +2,7 @@
 
 import type { AttributifyAttributes } from "@unocss/preset-attributify";
 
-type shortcuts = "input" | "logos" | "labels" | "linkgreen" | "linkblue";
+type shortcuts = "input" | "logos" | "labels" | "link";
 
 declare module "solid-js" {
   namespace JSX {

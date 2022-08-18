@@ -40,7 +40,13 @@ const ProjectCard: Component<{
       <div rotate-y-180 flex flex-col items-center>
         <div p-6>{props.date}</div>
         <div p-6>{props.description}</div>
-        <a href={props.source_url} linkgreen text-white>
+        <a
+          href={props.source_url}
+          link
+          border-green-500
+          hover:bg-green-300
+          text-white
+        >
           <span>Source Code</span>
           <div i-akar-icons-github-fill text-3xl ml-2 />
         </a>

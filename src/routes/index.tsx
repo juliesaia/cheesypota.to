@@ -90,7 +90,7 @@ const Index: Component<{}> = (props) => {
   });
 
   return (
-    <>
+    <div overflow-x-hidden>
       <Title>Julie Saia</Title>
 
       <nav
@@ -175,7 +175,7 @@ const Index: Component<{}> = (props) => {
           <Contact />
         </Fade>
       </div>
-    </>
+    </div>
   );
 };
 
