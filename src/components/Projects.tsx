@@ -14,7 +14,6 @@ import KeenSlider from "keen-slider";
 const ResizePlugin = (slider) => {
   const observer = new ResizeObserver(function () {
     slider.update();
-    console.log("updated");
   });
 
   slider.on("created", () => {
@@ -121,14 +120,10 @@ const Projects: Component<{}> = (props) => {
           libraries in my projects!
         </div>
 
-        <div lt-md:display-none grid grid-cols-5 mt-10>
+        <div lt-md:display-none mt-10 grid grid-cols-3>
           <For each={projects}>
             {(el, i) => (
-              <div
-                mx-8
-                classList={{ "col-start-2": i() === 0 }}
-                class="children:hover:rotate-y-180"
-              >
+              <div mx-8 class="children:hover:rotate-y-180" max-w-80>
                 <div
                   h-full
                   children:bg-dark-800
