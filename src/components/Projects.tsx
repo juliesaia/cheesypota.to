@@ -44,7 +44,7 @@ const Projects: Component<{}> = (props) => {
   const projects: JSXElement[] = [
     <ProjectCard
       title="This website!"
-      screenshot="screenshot1.webp"
+      screenshot={{ name: "screenshot1.webp", width: 500, height: 431 }}
       built_with={[
         {
           logo: "i-logos-solidjs-icon",
@@ -64,7 +64,7 @@ const Projects: Component<{}> = (props) => {
     />,
     <ProjectCard
       title="Rivals of Aether Stream App"
-      screenshot="screenshot2.webp"
+      screenshot={{ name: "screenshot2.webp", width: 500, height: 265 }}
       built_with={[
         {
           logo: "i-logos-electron",
@@ -87,7 +87,7 @@ const Projects: Component<{}> = (props) => {
     />,
     <ProjectCard
       title="Julie's Ladder"
-      screenshot="screenshot3.webp"
+      screenshot={{ name: "screenshot3.webp", width: 500, height: 281 }}
       built_with={[
         {
           logo: "i-logos-vue",

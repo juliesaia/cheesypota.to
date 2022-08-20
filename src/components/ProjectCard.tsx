@@ -2,7 +2,7 @@ import { Component, For } from "solid-js";
 
 const ProjectCard: Component<{
   title: string;
-  screenshot: string;
+  screenshot: { name: string; width: number; height: number };
   built_with: { logo: string; name: string }[];
   description: string;
   date: string;
@@ -15,7 +15,9 @@ const ProjectCard: Component<{
         <div>
           <img
             // max-w-30
-            src={props.screenshot}
+            width={props.screenshot.width}
+            height={props.screenshot.height}
+            src={props.screenshot.name}
             alt="Project screenshot"
             draggable={false}
           />

@@ -58,7 +58,13 @@ const Pfp: Component<{ canvas: HTMLCanvasElement }> = (props) => {
       }}
       aria-label="Confetti button easter egg"
     >
-      <img alt="Profile picture" src="pfp_resize.webp" draggable={false}></img>
+      <img
+        alt="Profile picture"
+        src="pfp_resize.webp"
+        draggable={false}
+        width="480"
+        height="384"
+      ></img>
     </button>
   );
 };

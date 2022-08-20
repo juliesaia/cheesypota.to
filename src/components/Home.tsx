@@ -5,8 +5,15 @@ const Home: Component<{}> = (props) => {
 
   return (
     <div flex flex-col>
-      <canvas ref={canvas} position-absolute h-full w-full></canvas>
-      <main flex items-center flex-grow flex-col>
+      <canvas
+        ref={canvas}
+        position-absolute
+        h-full
+        w-full
+        pointer-events-none
+        z-10000
+      ></canvas>
+      <div flex items-center flex-grow flex-col>
         <span text-green-300 text-4xl font-bold mt-8 text-center>
           Hi, I'm Julie Saia! 😁
         </span>
@@ -20,7 +27,6 @@ const Home: Component<{}> = (props) => {
             link
             border-green-500
             hover:bg-green-300
-            z-1000
           >
             <span>Github</span>
             <div i-akar-icons-github-fill text-3xl ml-2 />
@@ -31,13 +37,12 @@ const Home: Component<{}> = (props) => {
             link
             border-blue-500
             hover:bg-blue-300
-            z-1000
           >
             <span>LinkedIn</span>
             <div i-akar-icons-linkedin-box-fill text-2xl ml-2 />
           </a>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

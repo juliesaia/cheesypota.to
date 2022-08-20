@@ -1,5 +1,6 @@
 import solid from "solid-start/vite";
 import Unocss from "unocss/vite";
+import viteCompression from "vite-plugin-compression";
 import { defineConfig } from "vite";
 import {
   presetWind,
@@ -69,5 +70,6 @@ export default defineConfig({
         },
       ],
     }),
+    viteCompression({ algorithm: "brotliCompress" }),
   ],
 });

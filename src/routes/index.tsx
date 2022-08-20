@@ -69,30 +69,25 @@ const Index: Component<{}> = (props) => {
     // setIsMobile(mobile);
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
-
-    if (window.matchMedia("(min-width: 768px)").matches) {
-      setup_observers();
-    }
-
-    window.matchMedia("(min-width: 768px)").addEventListener("change", (e) => {
-      if (e.matches) {
-        setup_observers();
-      } else {
-        if (observer_navbar) {
-          for (let ref of tab_refs) {
-            if (ref) {
-              observer_navbar.unobserve(ref);
-            }
-          }
-        }
-      }
-    });
+    setup_observers();
   });
 
-  return (
-    <div overflow-x-hidden>
-      <Title>Julie Saia</Title>
+  const [showSidebar, setShowSidebar] = createSignal(false);
 
+  return (
+    <>
+      <Title>Julie Saia</Title>
+      <button
+        md:display-none
+        position-fixed
+        text-white
+        text-4xl
+        top-4
+        left-4
+        i-icon-park-outline-hamburger-button
+        z-10000
+        onClick={() => setShowSidebar(!showSidebar())}
+      ></button>
       <nav
         lt-md:display-none
         ref={navbar}
@@ -115,8 +110,7 @@ const Index: Component<{}> = (props) => {
               h-full
               flex
               items-center
-              px-6
-              my-6
+              p-6
               classList={{ "bg-dark-800": selectedIndex() === i() }}
               onClick={() => {
                 if (i() == 0) window.scrollTo(0, 0);
@@ -129,7 +123,50 @@ const Index: Component<{}> = (props) => {
         </For>
       </nav>
 
-      <div
+      <aside
+        md:display-none
+        ref={navbar}
+        h-screen
+        bg-dark-900
+        text-white
+        flex
+        flex-col
+        position-fixed
+        w="75%"
+        top-0
+        z-1000
+        pt-16
+        transition-transform
+        classList={{
+          "translate-x--100vw": !showSidebar(),
+          "translate-x-none": showSidebar(),
+        }}
+      >
+        <For each={tabs}>
+          {(el, i) => (
+            <a
+              href="/"
+              transition-colors
+              ease-in-out
+              hover:bg-dark-700
+              // h-full
+              flex
+              items-center
+              p-6
+              classList={{ "bg-dark-800": selectedIndex() === i() }}
+              onClick={() => {
+                if (i() == 0) window.scrollTo(0, 0);
+                else tab_refs[i()].scrollIntoView();
+                setShowSidebar(false);
+              }}
+            >
+              {el}
+            </a>
+          )}
+        </For>
+      </aside>
+
+      <main
         lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
         min-h-screen
         bg-dark-800
@@ -138,8 +175,8 @@ const Index: Component<{}> = (props) => {
         overflow-hidden
       >
         <Home />
-      </div>
-      <div
+      </main>
+      <section
         lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
         min-h-screen
         bg-dark-500
@@ -150,8 +187,8 @@ const Index: Component<{}> = (props) => {
         <Fade direction="right">
           <Projects />
         </Fade>
-      </div>
-      <div
+      </section>
+      <section
         lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
         min-h-screen
         bg-dark-800
@@ -162,8 +199,8 @@ const Index: Component<{}> = (props) => {
         <Fade direction="left">
           <About />
         </Fade>
-      </div>
-      <div
+      </section>
+      <section
         lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
         min-h-screen
         bg-dark-500
@@ -174,8 +211,8 @@ const Index: Component<{}> = (props) => {
         <Fade direction="right">
           <Contact />
         </Fade>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
