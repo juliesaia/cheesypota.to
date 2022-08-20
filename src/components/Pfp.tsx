@@ -18,7 +18,6 @@ const Pfp: Component<{ canvas: HTMLCanvasElement }> = (props) => {
       rounded-full
       transform
       transition-transform
-      ease-in-out
       overflow-hidden
       classList={{ "scale-90": hovered() || clicked() }}
       onMouseOver={() => {

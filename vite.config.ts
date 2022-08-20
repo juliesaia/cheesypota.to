@@ -27,8 +27,8 @@ export default defineConfig({
       ],
       transformers: [transformerVariantGroup()],
       safelist: [
-        '[min-h="[calc(100vh_-_0px)]"]',
-        '[min-h="[calc(100vh_-_64px)]"]',
+        '[md:min-h="[calc(100vh_-_0px)]"]',
+        '[md:min-h="[calc(100vh_-_64px)]"]',
         '[h="16"]',
       ],
       preflights: [
@@ -46,6 +46,9 @@ export default defineConfig({
           font-family: nunito, sans-serif; 
           overflow-y: overlay;
           
+        }
+        * {
+          -webkit-tap-highlight-color: transparent;
         }
         ::-webkit-scrollbar {
           width: 0.6rem;

@@ -72,7 +72,7 @@ const Index: Component<{}> = (props) => {
     setup_observers();
   });
 
-  const [showSidebar, setShowSidebar] = createSignal(false);
+  const [showSidebar, setShowSidebar] = createSignal(null);
 
   return (
     <>
@@ -105,7 +105,6 @@ const Index: Component<{}> = (props) => {
             <a
               href="/"
               transition-colors
-              ease-in-out
               hover:bg-dark-700
               h-full
               flex
@@ -136,10 +135,12 @@ const Index: Component<{}> = (props) => {
         top-0
         z-1000
         pt-16
-        transition-transform
+        translate-x--100vw
+        transition-transform-500
         classList={{
-          "translate-x--100vw": !showSidebar(),
-          "translate-x-none": showSidebar(),
+          "opacity-0": showSidebar() === null,
+          "translate-x--100vw ": !showSidebar(),
+          "translate-x-none  ": showSidebar(),
         }}
       >
         <For each={tabs}>
@@ -147,9 +148,7 @@ const Index: Component<{}> = (props) => {
             <a
               href="/"
               transition-colors
-              ease-in-out
               hover:bg-dark-700
-              // h-full
               flex
               items-center
               p-6
@@ -167,8 +166,9 @@ const Index: Component<{}> = (props) => {
       </aside>
 
       <main
-        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
-        min-h-screen
+        md:min-h={`[calc(100vh_-_${navbarHeight}px)]`}
+        lt-md:min-h-screen
+        lt-md:pt-12
         bg-dark-800
         ref={tab_refs[0]}
         scroll-mb-16
@@ -177,8 +177,8 @@ const Index: Component<{}> = (props) => {
         <Home />
       </main>
       <section
-        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
-        min-h-screen
+        md:min-h={`[calc(100vh_-_${navbarHeight}px)]`}
+        lt-md:min-h-screen
         bg-dark-500
         ref={tab_refs[1]}
         scroll-mb-16
@@ -189,8 +189,8 @@ const Index: Component<{}> = (props) => {
         </Fade>
       </section>
       <section
-        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
-        min-h-screen
+        md:min-h={`[calc(100vh_-_${navbarHeight}px)]`}
+        lt-md:min-h-screen
         bg-dark-800
         ref={tab_refs[2]}
         scroll-mb-16
@@ -201,8 +201,8 @@ const Index: Component<{}> = (props) => {
         </Fade>
       </section>
       <section
-        lt-md:min-h={`[calc(100vh_-_${navbarHeight}`}
-        min-h-screen
+        md:min-h={`[calc(100vh_-_${navbarHeight}px)]`}
+        lt-md:min-h-screen
         bg-dark-500
         ref={tab_refs[3]}
         scroll-mb-16
