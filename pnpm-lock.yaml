@@ -19,7 +19,6 @@ specifiers:
   solid-js: 1.4.7
   solid-start: 0.1.0-alpha.99
   solid-start-node: 0.1.0-alpha.99
-  solid-start-vercel: link:..\solid-start\packages\start-vercel
   typescript: ^4.7.4
   undici: ^5.9.1
   unocss: ^0.45.9
@@ -31,7 +30,6 @@ dependencies:
   '@emailjs/browser': 3.6.2
   canvas-confetti: 1.5.1
   keen-slider: 6.7.0
-  solid-start-vercel: link:../solid-start/packages/start-vercel
 
 devDependencies:
   '@iconify-json/akar-icons': 1.1.8
