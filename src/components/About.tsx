@@ -12,7 +12,7 @@ const About: Component<{}> = (props) => {
           Bachelor's degree at the University of Michigan.
         </div>
         <div flex-grow max-w-200 w-full>
-          {/* <div text-center>Skills</div> */}
+          <div text-center>Skills</div>
           <div
             bg-dark-300
             border

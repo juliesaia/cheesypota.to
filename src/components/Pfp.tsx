@@ -63,7 +63,7 @@ const Pfp: Component<{ canvas: HTMLCanvasElement }> = (props) => {
         draggable={false}
         width="480"
         height="384"
-      ></img>
+      />
     </button>
   );
 };

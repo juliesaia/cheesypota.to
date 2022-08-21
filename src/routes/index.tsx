@@ -5,16 +5,7 @@ import Fade from "~/components/Fade";
 import Contact from "~/components/Contact";
 import { Title } from "solid-start";
 
-import {
-  Component,
-  createSignal,
-  createMemo,
-  For,
-  Show,
-  createEffect,
-  onMount,
-} from "solid-js";
-// import { Title } from "solid-meta";
+import { Component, createSignal, For, onMount } from "solid-js";
 
 const Index: Component<{}> = (props) => {
   let navbar: HTMLDivElement;
@@ -65,8 +56,6 @@ const Index: Component<{}> = (props) => {
   }
 
   onMount(() => {
-    // const mobile = navigator.userAgentData.mobile;
-    // setIsMobile(mobile);
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
     setup_observers();
@@ -87,6 +76,7 @@ const Index: Component<{}> = (props) => {
         i-icon-park-outline-hamburger-button
         z-10000
         onClick={() => setShowSidebar(!showSidebar())}
+        aria-label="Open sidebar"
       ></button>
       <nav
         lt-md:display-none
@@ -135,7 +125,7 @@ const Index: Component<{}> = (props) => {
         top-0
         z-1000
         pt-16
-        translate-x--100vw
+        translate-x--full
         transition-transform-500
         classList={{
           "opacity-0": showSidebar() === null,

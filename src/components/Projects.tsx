@@ -1,11 +1,4 @@
-import {
-  Component,
-  JSXElement,
-  For,
-  onMount,
-  Show,
-  createEffect,
-} from "solid-js";
+import { Component, JSXElement, For, onMount } from "solid-js";
 import ProjectCard from "./ProjectCard";
 
 import "keen-slider/keen-slider.min.css";
@@ -44,7 +37,7 @@ const Projects: Component<{}> = (props) => {
   const projects: JSXElement[] = [
     <ProjectCard
       title="This website!"
-      screenshot={{ name: "screenshot1.webp", width: 500, height: 431 }}
+      screenshot={{ name: "screenshot1.webp", width: 500, height: 408 }}
       built_with={[
         {
           logo: "i-logos-solidjs-icon",
@@ -126,7 +119,7 @@ const Projects: Component<{}> = (props) => {
 
         <div lt-md:display-none mt-10 grid grid-cols-3>
           <For each={projects}>
-            {(el, i) => (
+            {(project) => (
               <div mx-8 class="children:hover:rotate-y-180" max-w-80>
                 <div
                   h-full
@@ -144,7 +137,7 @@ const Projects: Component<{}> = (props) => {
                   children:col-start-1
                   children:row-start-1
                 >
-                  {el}
+                  {project}
                 </div>
               </div>
             )}
@@ -158,14 +151,8 @@ const Projects: Component<{}> = (props) => {
             style="width: 100vw !important;"
           >
             <For each={projects}>
-              {(el, i) => (
-                <div
-                  classList={{
-                    "col-start-2": i() === 0,
-                    // [`number-slide${i()}`]: true,
-                  }}
-                  class="children:hover:rotate-y-180 keen-slider__slide"
-                >
+              {(project) => (
+                <div class="children:hover:rotate-y-180 keen-slider__slide">
                   <div
                     h-full
                     children:bg-dark-800
@@ -182,7 +169,7 @@ const Projects: Component<{}> = (props) => {
                     children:col-start-1
                     children:row-start-1
                   >
-                    {el}
+                    {project}
                   </div>
                 </div>
               )}

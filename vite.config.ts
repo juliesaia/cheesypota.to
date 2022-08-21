@@ -26,11 +26,7 @@ export default defineConfig({
         },
       ],
       transformers: [transformerVariantGroup()],
-      safelist: [
-        '[md:min-h="[calc(100vh_-_0px)]"]',
-        '[md:min-h="[calc(100vh_-_64px)]"]',
-        '[h="16"]',
-      ],
+      safelist: ['[md:min-h="[calc(100vh_-_64px)]"]', '[h="16"]'],
       preflights: [
         {
           getCSS: ({ theme }) => `
@@ -42,11 +38,12 @@ export default defineConfig({
           unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
           font-display: swap;
         }
+
         body {
           font-family: nunito, sans-serif; 
           overflow-y: overlay;
-          
         }
+
         * {
           -webkit-tap-highlight-color: transparent;
         }

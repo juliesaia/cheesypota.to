@@ -14,7 +14,6 @@ const ProjectCard: Component<{
         <div p-6>{props.title}</div>
         <div>
           <img
-            // max-w-30
             width={props.screenshot.width}
             height={props.screenshot.height}
             src={props.screenshot.name}
@@ -27,13 +26,11 @@ const ProjectCard: Component<{
           Built with:
           <div p-6 flex justify-center>
             <For each={props.built_with}>
-              {(el) => (
-                <>
-                  <div flex flex-col items-center mx-4>
-                    <div class={el.logo} text-4xl mb-2 />
-                    {el.name}
-                  </div>
-                </>
+              {(library) => (
+                <div flex flex-col items-center mx-4>
+                  <div class={library.logo} text-4xl mb-2 />
+                  {library.name}
+                </div>
               )}
             </For>
           </div>

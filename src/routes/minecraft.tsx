@@ -13,7 +13,6 @@ import {
   createEffect,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-// import { Title } from "solid-meta";
 
 const minecraft: Component<{}> = (props) => {
   const [itemInput, setItemInput] = createSignal("");

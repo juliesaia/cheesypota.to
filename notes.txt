@@ -1,1 +1,0 @@
-cls on mobile is because of scrollbar change, something is increasing in height on page load

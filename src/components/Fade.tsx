@@ -19,7 +19,6 @@ const Fade: Component<{
     const observer = new IntersectionObserver(
       (entries) => {
         let entry = entries[0];
-
         if (fired) {
           if (entry.isIntersecting) {
             setShown(true);
