@@ -53,7 +53,7 @@ const Projects: Component<{}> = (props) => {
       frameworks, released in 2021. UnoCSS is an extremely performant take
       on TailwindCSS, also released in 2021.`}
       date="July 2022"
-      source_url="https://github.com/juliesaia"
+      source_url="https://github.com/juliesaia/cheesypota.to"
     />,
     <ProjectCard
       title="Rivals of Aether Stream App"
@@ -76,7 +76,7 @@ const Projects: Component<{}> = (props) => {
       fighting game Rivals of Aether. Made for the tournament Sunnyshore,
       which I won!`}
       date="May 2022"
-      source_url="https://github.com/juliesaia"
+      source_url="https://github.com/juliesaia/rivals-stream-app"
     />,
     <ProjectCard
       title="Julie's Ladder"
@@ -94,7 +94,7 @@ const Projects: Component<{}> = (props) => {
       description={`A matchmaking service for Rivals of Aether, complete with a chat
       system and Steam login integration.`}
       date="September 2021"
-      source_url="https://github.com/juliesaia"
+      source_url="https://github.com/juliesaia/julies-ladder-old"
     />,
   ];
 
