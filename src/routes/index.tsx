@@ -100,7 +100,7 @@ const Index: Component<{}> = (props) => {
           {(el, i) => (
             <a
               href="/"
-              transition-colors
+              transition-colors-300
               hover:bg-dark-700
               h-full
               flex
@@ -144,7 +144,7 @@ const Index: Component<{}> = (props) => {
           {(el, i) => (
             <a
               href="/"
-              transition-colors
+              transition-colors-300
               hover:bg-dark-700
               flex
               items-center
