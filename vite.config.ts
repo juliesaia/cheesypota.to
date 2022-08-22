@@ -1,6 +1,7 @@
 import solid from "solid-start/vite";
 import Unocss from "unocss/vite";
 import viteCompression from "vite-plugin-compression";
+import vercel from "solid-start-vercel";
 import { defineConfig } from "vite";
 import {
   presetWind,
@@ -11,7 +12,7 @@ import {
 
 export default defineConfig({
   plugins: [
-    solid(),
+    solid({ adapter: vercel() }),
     Unocss({
       presets: [presetWind(), presetAttributify(), presetIcons()],
       shortcuts: [

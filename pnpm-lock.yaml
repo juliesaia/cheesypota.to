@@ -10,15 +10,21 @@ specifiers:
   '@iconify-json/mdi': ^1.1.30
   '@iconify-json/simple-icons': ^1.1.22
   '@iconify-json/vscode-icons': ^1.1.10
+  '@rollup/plugin-commonjs': ^22.0.1
+  '@rollup/plugin-json': ^4.1.0
+  '@rollup/plugin-node-resolve': ^13.3.0
   '@solidjs/meta': ^0.28.0
   '@solidjs/router': ^0.4.2
   '@unocss/preset-attributify': ^0.45.9
   '@unocss/reset': ^0.45.9
   canvas-confetti: ^1.5.1
   keen-slider: ^6.7.0
+  rollup: ^2.77.2
   solid-js: 1.4.7
   solid-start: 0.1.0-alpha.99
   solid-start-node: 0.1.0-alpha.99
+  solid-start-vercel: link:start-vercel
+  terser: ^5.14.2
   typescript: ^4.7.4
   undici: ^5.9.1
   unocss: ^0.45.9
@@ -30,6 +36,7 @@ dependencies:
   '@emailjs/browser': 3.6.2
   canvas-confetti: 1.5.1
   keen-slider: 6.7.0
+  solid-start-vercel: link:start-vercel
 
 devDependencies:
   '@iconify-json/akar-icons': 1.1.8
@@ -40,18 +47,23 @@ devDependencies:
   '@iconify-json/mdi': 1.1.30
   '@iconify-json/simple-icons': 1.1.22
   '@iconify-json/vscode-icons': 1.1.10
+  '@rollup/plugin-commonjs': 22.0.2_rollup@2.78.1
+  '@rollup/plugin-json': 4.1.0_rollup@2.78.1
+  '@rollup/plugin-node-resolve': 13.3.0_rollup@2.78.1
   '@solidjs/meta': 0.28.0_solid-js@1.4.7
   '@solidjs/router': 0.4.2_solid-js@1.4.7
   '@unocss/preset-attributify': 0.45.9
   '@unocss/reset': 0.45.9
+  rollup: 2.78.1
   solid-js: 1.4.7
   solid-start: 0.1.0-alpha.99_i3e5gkc6iaajliwj4z46dnxgxe
   solid-start-node: 0.1.0-alpha.99_aojdsky36itlzkuoj3gc3zyxuq
+  terser: 5.14.2
   typescript: 4.7.4
   undici: 5.9.1
   unocss: 0.45.9_vite@3.0.9
   user-agent-data-types: 0.3.0
-  vite: 3.0.9
+  vite: 3.0.9_terser@5.14.2
   vite-plugin-compression: 0.5.1_vite@3.0.9
 
 packages:
@@ -1678,7 +1690,7 @@ packages:
       '@unocss/scope': 0.45.9
       '@unocss/transformer-directives': 0.45.9
       magic-string: 0.26.2
-      vite: 3.0.9
+      vite: 3.0.9_terser@5.14.2
     dev: true
 
   /accepts/1.3.8:
@@ -3074,7 +3086,7 @@ packages:
       solid-start: 0.1.0-alpha.99_i3e5gkc6iaajliwj4z46dnxgxe
       terser: 5.14.2
       undici: 5.9.1
-      vite: 3.0.9
+      vite: 3.0.9_terser@5.14.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3115,7 +3127,7 @@ packages:
       solid-js: 1.4.7
       terser: 5.14.2
       undici: 5.9.1
-      vite: 3.0.9
+      vite: 3.0.9_terser@5.14.2
       vite-plugin-inspect: 0.6.0_vite@3.0.9
       vite-plugin-solid: 2.3.0_solid-js@1.4.7+vite@3.0.9
       wait-on: 6.0.1_debug@4.3.4
@@ -3335,7 +3347,7 @@ packages:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 10.1.0
-      vite: 3.0.9
+      vite: 3.0.9_terser@5.14.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3351,7 +3363,7 @@ packages:
       kolorist: 1.5.1
       sirv: 2.0.2
       ufo: 0.8.5
-      vite: 3.0.9
+      vite: 3.0.9_terser@5.14.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3368,12 +3380,12 @@ packages:
       merge-anything: 5.0.2
       solid-js: 1.4.7
       solid-refresh: 0.4.1_solid-js@1.4.7
-      vite: 3.0.9
+      vite: 3.0.9_terser@5.14.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/3.0.9:
+  /vite/3.0.9_terser@5.14.2:
     resolution: {integrity: sha512-waYABTM+G6DBTCpYAxvevpG50UOlZuynR0ckTK5PawNVt7ebX6X7wNXHaGIO6wYYFXSM7/WcuFuO2QzhBB6aMw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -3396,6 +3408,7 @@ packages:
       postcss: 8.4.16
       resolve: 1.22.1
       rollup: 2.77.3
+      terser: 5.14.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true

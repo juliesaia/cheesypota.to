@@ -59,7 +59,7 @@ const Pfp: Component<{ canvas: HTMLCanvasElement }> = (props) => {
     >
       <img
         alt="Profile picture"
-        src="pfp_resize.webp"
+        src="pfp.webp"
         draggable={false}
         width="480"
         height="384"
