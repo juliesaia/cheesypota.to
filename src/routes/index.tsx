@@ -64,7 +64,12 @@ const Index: Component<{}> = (props) => {
   const [showSidebar, setShowSidebar] = createSignal(null);
 
   return (
-    <>
+    <div
+      onClick={(e) => {
+        if (e.target.id != "sidebar" && e.target.id != "sidebar-button")
+          setShowSidebar(false);
+      }}
+    >
       <Title>Julie Saia</Title>
       <button
         md:display-none
@@ -77,6 +82,7 @@ const Index: Component<{}> = (props) => {
         z-10000
         onClick={() => setShowSidebar(!showSidebar())}
         aria-label="Open sidebar"
+        id="sidebar-button"
       ></button>
       <nav
         lt-md:display-none
@@ -113,6 +119,7 @@ const Index: Component<{}> = (props) => {
       </nav>
 
       <aside
+        id="sidebar"
         md:display-none
         ref={navbar}
         h-screen
@@ -202,7 +209,7 @@ const Index: Component<{}> = (props) => {
           <Contact />
         </Fade>
       </section>
-    </>
+    </div>
   );
 };
 
