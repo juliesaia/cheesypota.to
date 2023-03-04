@@ -19,7 +19,7 @@ const Home: Component<{}> = (props) => {
         </span>
         <Pfp canvas={canvas}></Pfp>
         <span text-green-300 text-2xl font-bold mt-8 px-12 text-center>
-          I'm a full-stack web developer from Ann Arbor, MI.
+          I'm a full-stack web developer based in Ann Arbor, MI.
         </span>
         <div mt-8 flex justify-center text-white>
           <a
